@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Webpage with Resolution</title>
+</head>
+<body>
+    <h1>Open Webpage with Resolution</h1>
+    <label for="resolutionInput">Resolution (e.g., 1280x800):</label>
+    <input type="text" id="resolutionInput" placeholder="Enter resolution">
+    <button onclick="openWebpage()">Open Webpage</button>
+
+    <script>
+        function openWebpage() {
+            var resolution = document.getElementById('resolutionInput').value;
+            var url = 'https://www.getcalley.com/';
+            var widthHeight = resolution.split('x');
+            var width = parseInt(widthHeight[0]);
+            var height = parseInt(widthHeight[1]);
+
+            var newWindow = window.open(url, '_blank', `width=${width}, height=${height}`);
+
+            setTimeout(() => {
+                if (newWindow) {
+                    newWindow.document.querySelector('meta[name="viewport"]').setAttribute('content', `width=${width}, height=${height}, initial-scale=1.0`);
+                } else {
+                    alert('Popup blocked! Please allow popups for this site and try again.');
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
+
